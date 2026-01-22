@@ -21,5 +21,40 @@
       navigator.serviceWorker.register('service-worker.js');
     }
   </script>
+  <script>
+let rules = [];
+
+// Ladataan säännöt
+fetch("rules.json")
+  .then(response => response.json())
+  .then(data => {
+    rules = data;
+    console.log("Säännöt ladattu:", rules.length);
+  })
+  .catch(err => console.error("Virhe rules.json:", err));
+
+function searchRules() {
+  const query = document.getElementById("search").value.toLowerCase();
+  const resultsDiv = document.getElementById("results");
+
+  resultsDiv.innerHTML = "";
+
+  if (query.length < 2) return;
+
+  rules.forEach(rule => {
+    const haystack = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
+
+    if (haystack.includes(query)) {
+      const item = document.createElement("div");
+      item.className = "result";
+      item.innerHTML = `
+        <h3>${rule.id} ${rule.title}</h3>
+        <p>${rule.text}</p>
+      `;
+      resultsDiv.appendChild(item);
+    }
+  });
+}
+</script>
 </body>
 </html>
