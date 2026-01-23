@@ -61,44 +61,45 @@
   <div id="results"></div>
 
   <script>
-    let rules = [];
+  const rules = [
+    {
+      "id": "1",
+      "title": "Johdanto",
+      "text": "Sovellettu reserviläisammunta (SRA) on vapaaehtoisten maanpuolustusjärjestöjen jäsenille tarkoitettua toiminnallista ja turvallista aseenkäsittely- ja ampumataitoa kehittävää urheiluammuntaa."
+    },
+    {
+      "id": "3.2",
+      "title": "Turvallisuus",
+      "text": "Kaiken toiminnan tulee tapahtua turvallisesti ja tuomarin ohjeita noudattaen."
+    },
+    {
+      "id": "8.1",
+      "title": "Uusinnat",
+      "text": "Uusinta voidaan myöntää, mikäli suoritukseen on vaikuttanut ampujasta riippumaton syy."
+    }
+    // ← tähän lisätään loput myöhemmin
+  ];
 
-    // Ladataan säännöt
-    fetch("rules.json")
-      .then(response => response.json())
-      .then(data => {
-        rules = data;
-        console.log("Säännöt ladattu:", rules.length);
-      })
-      .catch(err => {
-        console.error("rules.json ei lataudu", err);
-        document.getElementById("results").innerHTML =
-          "<p>Virhe: rules.json ei lataudu</p>";
-      });
+  function searchRules() {
+    const query = document.getElementById("search").value.toLowerCase();
+    const results = document.getElementById("results");
+    results.innerHTML = "";
 
-    function searchRules() {
-      const query = document.getElementById("search").value.toLowerCase();
-      const results = document.getElementById("results");
+    if (query.length < 2) return;
 
-      results.innerHTML = "";
-
-      if (query.length < 2) return;
-
-      rules.forEach(rule => {
-        const text = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
-
-        if (text.includes(query)) {
-          const div = document.createElement("div");
-          div.className = "result";
-          div.innerHTML = `
+    rules.forEach(rule => {
+      const text = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
+      if (text.includes(query)) {
+        results.innerHTML += `
+          <div class="result">
             <h3>${rule.id} ${rule.title}</h3>
             <p>${rule.text}</p>
-          `;
-          results.appendChild(div);
-        }
-      });
-    }
-  </script>
+          </div>
+        `;
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
