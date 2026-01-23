@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SRA 8.1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRA 8.1</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 16px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #111;
-      color: #fff;
-    }
-    h1 {
-      margin: 0 0 12px 0;
-      font-size: 26px;
-    }
-    input[type="search"] {
-      width: 100%;
-      padding: 14px;
-      font-size: 18px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 20px;
-    }
-    .result {
-      border-bottom: 1px solid #333;
-      padding: 12px 0;
-    }
-    .result h3 {
-      margin: 0 0 6px 0;
-      font-size: 18px;
-    }
-    .result p {
-      margin: 0;
-      font-size: 15px;
-      color: #ccc;
-      line-height: 1.4;
-    }
-  </style>
+<style>
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #111;
+  color: #fff;
+}
+h1 {
+  margin-bottom: 12px;
+}
+input {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 20px;
+}
+.result {
+  border-bottom: 1px solid #333;
+  padding: 12px 0;
+}
+.result h3 {
+  margin: 0 0 6px;
+}
+.result p {
+  margin: 0;
+  color: #ccc;
+  line-height: 1.4;
+}
+</style>
 </head>
 
 <body>
@@ -48,91 +45,47 @@
 
 <input
   type="search"
-  id="search"
   placeholder="Hae säännöistä…"
-  oninput="searchRules()"
-/>
+  oninput="searchRules(this.value)"
+>
 
 <div id="results"></div>
 
 <script>
 const rules = [
-  {
-    "id": "1",
-    "title": "Johdanto",
-    "text": "Sovellettu reserviläisammunta (SRA) on vapaaehtoisten maanpuolustusjärjestöjen jäsenille tarkoitettua toiminnallista ja turvallista aseenkäsittely- ja ampumataitoa sekä aseiden käyttöä kehittävää ja mittaavaa urheiluammuntaa."
-  },
-  {
-    "id": "1.1",
-    "title": "Yleiset periaatteet",
-    "text": "Ammuntaan voi osallistua RESUL:n jäsenliiton tai hyväksytyn yhteistyötahon jäsen, joka on suorittanut hyväksytysti SRA ampujan kurssin ja aseenkäsittelykokeen."
-  },
-  {
-    "id": "1.2",
-    "title": "Kilpailut",
-    "text": "Kilpailu koostuu rasteista ja voidaan järjestää yhdelle tai useammalle asetyypille."
-  },
-  {
-    "id": "2",
-    "title": "Kilpailun toimihenkilöt",
-    "text": "Kilpailun toimihenkilöitä ovat tekninen asiantuntija, kilpailunjohtaja, ratamestari, tuloslaskentavastaava ja tuomari."
-  },
-  {
-    "id": "3",
-    "title": "Kilpailun rakenne ja turvallisuus",
-    "text": "Rastien suunnittelussa ja toteutuksessa on aina noudatettava turvallisuusmääräyksiä."
-  },
-  {
-    "id": "3.2",
-    "title": "Turvallisuus",
-    "text": "Kaiken toiminnan tulee tapahtua turvallisesti ja tuomarin ohjeita noudattaen."
-  },
-  {
-    "id": "4",
-    "title": "Toiminta rastilla",
-    "text": "Rastilla toimitaan rastikuvauksen ja tuomarin antamien ohjeiden mukaisesti."
-  },
-  {
-    "id": "5",
-    "title": "Ase- ja varustemääräykset",
-    "text": "Kilpailussa käytettävien aseiden ja varusteiden tulee täyttää sääntöjen vaatimukset."
-  },
-  {
-    "id": "6",
-    "title": "Taulut ja pistelaskenta",
-    "text": "Pistelaskenta perustuu tauluista saatuihin pisteisiin."
-  },
-  {
-    "id": "8.1",
-    "title": "Uusinnat",
-    "text": "Uusinta voidaan myöntää, mikäli suoritukseen on vaikuttanut ampujasta riippumaton syy."
-  },
-  {
-    "id": "L7",
-    "title": "TST-luokan varusteet",
-    "text": "TST-luokan varusteiden vähimmäispaino on 12 kg."
-  }
+  { id:"1", title:"Johdanto", text:"SRA on toiminnallista ja turvallista urheiluammuntaa." },
+  { id:"1.1", title:"Yleiset periaatteet", text:"Osallistuminen edellyttää hyväksyttyä SRA-kurssia." },
+  { id:"2", title:"Kilpailun toimihenkilöt", text:"Kilpailussa toimii kilpailunjohtaja, ratamestari ja tuomarit." },
+  { id:"3", title:"Turvallisuus", text:"Kaiken toiminnan on oltava turvallista." },
+  { id:"4", title:"Toiminta rastilla", text:"Rastilla noudatetaan tuomarin ohjeita." },
+  { id:"5", title:"Ase- ja varusteet", text:"Aseiden ja varusteiden on oltava sääntöjen mukaisia." },
+  { id:"8.1", title:"Uusinnat", text:"Uusinta voidaan myöntää ratavian vuoksi." },
+  { id:"L7", title:"TST-luokka", text:"Varusteiden vähimmäispaino on 12 kg." }
 ];
 
-function searchRules() {
-  const query = document.getElementById("search").value.toLowerCase();
-  const results = document.getElementById("results");
+const results = document.getElementById("results");
+
+function render(list) {
   results.innerHTML = "";
-
-  if (query.length < 2) return;
-
-  rules.forEach(rule => {
-    const text = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
-    if (text.includes(query)) {
-      results.innerHTML += `
-        <div class="result">
-          <h3>${rule.id} ${rule.title}</h3>
-          <p>${rule.text}</p>
-        </div>
-      `;
-    }
+  list.forEach(r => {
+    results.innerHTML += `
+      <div class="result">
+        <h3>${r.id} ${r.title}</h3>
+        <p>${r.text}</p>
+      </div>`;
   });
 }
+
+function searchRules(q) {
+  q = q.toLowerCase();
+  const filtered = rules.filter(r =>
+    (r.id + r.title + r.text).toLowerCase().includes(q)
+  );
+  render(filtered);
+}
+
+// näytä kaikki heti alussa
+render(rules);
 </script>
 
 </body>
