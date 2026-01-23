@@ -62,43 +62,203 @@
 
   <script>
   const rules = [
-    {
-      "id": "1",
-      "title": "Johdanto",
-      "text": "Sovellettu reserviläisammunta (SRA) on vapaaehtoisten maanpuolustusjärjestöjen jäsenille tarkoitettua toiminnallista ja turvallista aseenkäsittely- ja ampumataitoa kehittävää urheiluammuntaa."
-    },
-    {
-      "id": "3.2",
-      "title": "Turvallisuus",
-      "text": "Kaiken toiminnan tulee tapahtua turvallisesti ja tuomarin ohjeita noudattaen."
-    },
-    {
-      "id": "8.1",
-      "title": "Uusinnat",
-      "text": "Uusinta voidaan myöntää, mikäli suoritukseen on vaikuttanut ampujasta riippumaton syy."
-    }
-    // ← tähän lisätään loput myöhemmin
-  ];
-
-  function searchRules() {
-    const query = document.getElementById("search").value.toLowerCase();
-    const results = document.getElementById("results");
-    results.innerHTML = "";
-
-    if (query.length < 2) return;
-
-    rules.forEach(rule => {
-      const text = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
-      if (text.includes(query)) {
-        results.innerHTML += `
-          <div class="result">
-            <h3>${rule.id} ${rule.title}</h3>
-            <p>${rule.text}</p>
-          </div>
-        `;
-      }
-    });
+  {
+    "id": "1",
+    "title": "Johdanto",
+    "text": "Sovellettu reserviläisammunta (SRA) on vapaaehtoisten maanpuolustusjärjestöjen jäsenille tarkoitettua toiminnallista ja turvallista aseenkäsittely- ja ampumataitoa sekä aseiden käyttöä kehittävää ja mittaavaa urheiluammuntaa."
+  },
+  {
+    "id": "1.1",
+    "title": "Yleiset periaatteet",
+    "text": "Ammuntaan voi osallistua Reserviläisurheiluliitto ry:n (RESUL) jäsenliiton tai RESUL:n hyväksymän yhteistyötahon jäsen, joka on suorittanut RESUL:n SRA toimikunnan hyväksymän SRA ampujan kurssin ja siihen liittyvän aseenkäsittelykokeen hyväksyttävästi. Alle 18-vuotiaalla tulee lisäksi olla huoltajan allekirjoittama kirjallinen osallistumislupa. Harjoituksiin voi tuomarin valvonnassa ja suostumuksella osallistua teoriakokeen suorittanut henkilö, joka harjoittelee aseenkäsittelykoetta varten. Ampujalla tulee olla voimassa oleva Reserviläisurheiluliiton hyväksymä ammunnan harjoittelu- ja kilpailutoiminnan kattava vakuutusturva. Näitä sääntöjä noudatetaan lajin kaikissa kilpailuissa ja harjoituksissa. Lajin kilpailuissa noudatetaan lisäksi asetarkastus- ja kilpailunjärjestämisohjeita. Sääntökohtien tulkintaa varten SRA toimikunta voi ylläpitää teknistä sääntöliitettä sekä antaa erillisiä ohjeita ja määräyksiä."
+  },
+  {
+    "id": "1.2",
+    "title": "Kilpailut",
+    "text": "Kilpailu koostuu rasteista, joilla kullakin voidaan käyttää useampaa kuin yhtä asetta ja asetyyppiä. Kilpailuja voidaan järjestää joko pelkästään yhdelle asetyypille tai pitää useamman asetyypin yhdistelmäkilpailuja. Kilpailukutsussa on ilmoitettava käytettävät asetyypit, rastien lukumäärä, minimilaukausmäärät asetyypeittäin, maksimiampumaetäisyydet ja mahdolliset erityispainotukset. Kilpailuissa on kolme eri luokkaa: vakio, avoin ja TST, jotka määräytyvät ampujan aseiden ja varusteiden mukaan."
+  },
+  {
+    "id": "2",
+    "title": "Kilpailun toimihenkilöt",
+    "text": "Kilpailun toimihenkilöitä ovat tekninen asiantuntija, kilpailunjohtaja, ratamestari, tuloslaskentavastaava ja tuomari."
+  },
+  {
+    "id": "2.1",
+    "title": "Tekninen asiantuntija",
+    "text": "Kansallisissa ja kansainvälisissä mestaruuskilpailuissa on oltava vastaavan liiton hallituksen hyväksymä tekninen asiantuntija, jolla on SRA-kouluttajan tai -ylituomarin pätevyys."
+  },
+  {
+    "id": "2.2",
+    "title": "Kilpailunjohtaja",
+    "text": "Kilpailunjohtajana voi toimia SRA-tuomarin pätevyyden omaava henkilö. Kilpailunjohtaja on vastuussa koko kilpailusta ja sen hallinnosta, ajoituksista, rastimateriaaleista ja tarvittavasta ruoka-, lääkintä- ja muusta huollosta sekä turvallisuudesta. Kilpailunjohtajalla on ylin päätäntävalta mainituissa asioissa lukuun ottamatta protestipäätöksiä. Kilpailunjohtaja toimii juryn puheenjohtajana ilman äänivaltaa. Kilpailunjohtaja voi piiritason ja pienemmissä kilpailuissa toimia myös muissa tehtävissä kuten ratamestarina tai tuomarina."
+  },
+  {
+    "id": "2.3",
+    "title": "Ratamestari",
+    "text": "Ratamestarina voi toimia SRA-tuomarin pätevyyden omaava henkilö. Ratamestarin nimittää kilpailunjohtaja. Ratamestari on vastuussa rastien turvallisuudesta ja turvallisten tehtävien suunnittelusta, valvoo että ohjeita ja sääntöjä noudatetaan, vastaa ratahenkilöstön koulutuksesta ja ohjauksesta, käsittelee protestit, saattaa turvallisuusrikkomukset tietoonsa ja johtaa rastihenkilöstöä kilpailun aikana. Ratamestari vastaa siitä, että rasteilla noudatetaan toiminta- ja pistelaskusääntöjä tasapuolisesti kaikkien ampujien osalta. Ratamestari voi piiritason ja pienemmissä kilpailuissa toimia myös muissa tehtävissä kuten tuomarina."
+  },
+  {
+    "id": "2.4",
+    "title": "Tuloslaskentavastaava",
+    "text": "Tuloslaskentavastaava on kilpailun toimihenkilö, joka vastaa kaikkien kilpailun tulosten keräämisestä, lajittelusta, säilyttämisestä sekä väli- ja lopullisten tulosten ja tilastojen laskemisesta, tarkistamisesta ja julkaisusta. Hän varmistaa, että epätäydellisesti tai epätarkasti täytetty tulos tarkistutetaan välittömästi ratamestarilla ja toimii ratamestarin välittömässä alaisuudessa. Kansallisissa ja kansainvälisissä mestaruuskilpailuissa tuloslaskentavastaavana voi toimia SRA-tuomarin pätevyyden omaava henkilö."
+  },
+  {
+    "id": "2.5",
+    "title": "Tuomari",
+    "text": "SRA-tuomarina voi toimia SRA-tuomarikoulutuksen hyväksytysti suorittanut ja SRA-rekisteriin merkitty henkilö. Tuomarin tehtävänä on valvoa sääntöjen noudattamista ja kilpailun turvallista ja tasapuolista läpivientiä."
   }
+],
+,
+  {
+    "id": "3",
+    "title": "Kilpailun rakenne ja turvallisuus",
+    "text": "Kilpailu muodostuu rasteista, joiden sisältö ja suoritusjärjestys määritellään kilpailukutsussa tai rastikuvauksissa. Rastien suunnittelussa ja toteutuksessa on aina noudatettava turvallisuusmääräyksiä. Rastin sisältöä tai ratalaitteita voidaan muuttaa kilpailun aikana vain turvallisuuden sitä vaatiessa. Mikäli rastia muutetaan tavalla, jonka merkitys suorituksen kannalta ei ole vähäinen, on kaikkien rastin jo suorittaneiden uusittava suoritus. Ellei uusintaa voida järjestää, rasti on hylättävä kilpailusta."
+  },
+  {
+    "id": "3.1",
+    "title": "Ampumatehtävät",
+    "text": "Rastilla voidaan käyttää useampaa kuin yhtä asetta ja ampumatehtävät voivat sisältää erilaisia ampuma-asentoja, etäisyyksiä ja suoritustapoja. Pistoolilla ampumaosuus tai osa siitä voidaan määrätä suoritettavaksi käyttäen vain vahvempaa tai heikompaa kättä. Haulikkorastin laukausmäärä ei saa ylittää viittätoista laukausta, ellei kyseessä ole teemakilpailu."
+  },
+  {
+    "id": "3.2",
+    "title": "Turvallisuus",
+    "text": "Kilpailijaa ei saa pakottaa ampumaan pistoolilla SRA-taulun kokoiseen tauluun yli 25 metrin etäisyydeltä tai vastaavan kokoiseen osumaan reagoivaan tauluun yli 50 metrin etäisyydeltä. Pienempien taulujen tulee olla tätä lähempänä. Kaiken toiminnan tulee tapahtua turvallisesti ja tuomarin ohjeita noudattaen."
+  },
+  {
+    "id": "4",
+    "title": "Toiminta rastilla",
+    "text": "Rastilla toimitaan rastikuvauksen ja tuomarin antamien ohjeiden mukaisesti. Ampujan on noudatettava turvallisia käsittelytapoja koko suorituksen ajan."
+  },
+  {
+    "id": "4.1",
+    "title": "Yleistä",
+    "text": "Ampuja saa aloittaa suorituksen vasta tuomarin antamasta aloitusmerkistä. Suorituksen aikana ampujan on noudatettava kaikkia turvallisuusmääräyksiä ja rastikuvauksessa annettuja ohjeita. Ampuja ei saa ylittää rastille asetettuja rajalinjoja. Rajalinjan ylittämisestä seuraa toimintavirherangaistus."
+  },
+  {
+    "id": "4.2",
+    "title": "Ratakomennot ja suorituksen aikainen toiminta",
+    "text": "Tuomari antaa kilpailijalle ratakomennot ja valvoo suorituksen turvallisuutta. Kilpailijan on noudatettava annettuja käskyjä viivytyksettä. Suorituksen päätyttyä tuomarin on varmistuttava aseen turvallisesta tyhjentämisestä ja siitä, ettei ajanottoon enää vaikuta aseen käsittelystä syntyvä ääni."
+  },,
+  {
+    "id": "5",
+    "title": "Ase- ja varustemääräykset",
+    "text": "Kilpailussa käytettävien aseiden ja varusteiden tulee täyttää näissä säännöissä ja niiden liitteissä asetetut vaatimukset. Kilpailun järjestäjä voi tarkastaa aseet ja varusteet ennen kilpailua tai kilpailun aikana."
+  },
+  {
+    "id": "5.1",
+    "title": "Yleistä",
+    "text": "Ampujan on käytettävä vain sääntöjen mukaisia aseita ja varusteita. Mikäli varuste ei täytä vaatimuksia, voidaan ampuja siirtää toiseen luokkaan tai sulkea kilpailusta. Aseiden ja varusteiden turvallisuus on aina ampujan vastuulla."
+  },
+  {
+    "id": "5.2",
+    "title": "Aseet",
+    "text": "Kilpailussa voidaan käyttää pistoolia, kivääriä, tarkka-ampujakivääriä ja haulikkoa kilpailukutsun mukaisesti. Aseiden tulee olla toimintavarmoja ja turvallisia. Kunkin asetyypin sallitut ja kielletyt ominaisuudet on määritelty erikseen sääntöjen liitteissä."
+  },
+  {
+    "id": "5.3",
+    "title": "Varusteet",
+    "text": "Varusteiden tulee olla turvallisia ja kilpailuluokan mukaisia. Varusteiden käyttö ei saa antaa epäreilua etua eikä vaarantaa turvallisuutta. TST-luokan erityisvarusteet ja vähimmäisvaatimukset on määritelty liitteessä 7."
+  },
+  {
+    "id": "6",
+    "title": "Käytettävät taulut ja pistelaskenta",
+    "text": "Rastien pisteytys perustuu tauluista saatuihin pisteisiin sekä mahdollisiin erikseen määrättyihin tehtäviin. Pistelaskennan tulee olla tasapuolista ja sääntöjen mukaista kaikille kilpailijoille."
+  },
+  {
+    "id": "6.1",
+    "title": "Yleiset periaatteet",
+    "text": "Rastilla voidaan antaa pisteitä myös erikseen määritellyistä tehtävistä, joiden maksimipistemäärä saa olla enintään 10 % rastin maksimipisteistä. Rastien kokonaispisteet muodostuvat taulupisteistä ja mahdollisista lisätehtävistä."
+  },
+  {
+    "id": "6.2",
+    "title": "Taulut",
+    "text": "Kilpailussa voidaan käyttää pahvitauluja, osumaan reagoivia tauluja ja muita sääntöjen mukaisia tauluja. Taulujen tulee erottua taustastaan ja olla kaikille ampujille samalla tavalla havaittavissa. Yli 100 metrin etäisyydelle asetettavat taulut on varustettava kontrastitaustalla kansallisissa ja kansainvälisissä mestaruuskilpailuissa."
+  },
+  {
+    "id": "6.3",
+    "title": "Osumien tulkkaus",
+    "text": "Osumien tulkkauksen suorittaa tuomari. Kukaan ei saa koskettaa tauluja ennen tulkkausta. Osumaksi hyväksytään sääntöjen mukainen luodinreikä taulun osuma-alueella. Sirpaleosumia ei hyväksytä."
+  },
+  {
+    "id": "6.4",
+    "title": "Taulupisteet",
+    "text": "Taulupisteet määräytyvät käytetyn taulutyypin ja osuma-alueiden mukaisesti. Tarkemmat pistearvot ja osuma-alueet on esitetty sääntöjen liitteissä ja kilpailunjärjestämisohjeessa."
+  },
+  {
+    "id": "6.5",
+    "title": "Pistelaskutavat",
+    "text": "Kilpailu voidaan ampua eri pistelaskutavoilla kilpailukutsun mukaisesti. Pistelaskutavan tulee olla sama kaikille saman luokan kilpailijoille."
+  },
+  {
+    "id": "6.6",
+    "title": "Pistelaskun rangaistukset",
+    "text": "Sääntöjen vastaisesta toiminnasta voidaan määrätä pistemenetyksiä tai muita rangaistuksia. Rangaistusten tulee olla sääntöjen mukaisia ja tasapuolisia."
+  },
+  {
+    "id": "6.7",
+    "title": "Tuloslaskenta",
+    "text": "Tuloslaskenta perustuu rastikohtaisiin tuloksiin. Tuloslaskennan tulee olla tarkkaa ja läpinäkyvää, ja virheet on korjattava viipymättä."
+  },,
+  {
+    "id": "7",
+    "title": "Tuloslaskentajärjestelmä",
+    "text": "Kilpailussa käytetään kilpailukutsussa ilmoitettua tuloslaskentajärjestelmää. Tuloslaskentajärjestelmän tulee olla kaikille kilpailijoille sama saman luokan sisällä. Järjestelmän on tuotettava luotettavat ja tarkistettavat tulokset."
+  },
+  {
+    "id": "8",
+    "title": "Uusinnat ja protestointi",
+    "text": "Kilpailijalla on oikeus uusintaan ja protestiin näissä säännöissä määritellyissä tilanteissa. Protestit käsitellään sääntöjen mukaisesti ja tasapuolisesti."
+  },
+  {
+    "id": "8.1",
+    "title": "Uusinnat",
+    "text": "Uusinta voidaan myöntää, mikäli kilpailijan suoritukseen on vaikuttanut kilpailunjärjestäjän virhe, ratavika tai muu ampujasta riippumaton syy. Mikäli virhe koskee useita kilpailijoita eikä uusintaa voida järjestää kaikille, rasti voidaan poistaa kilpailusta."
+  },
+  {
+    "id": "8.2",
+    "title": "Valitusmenettely",
+    "text": "Protesti on tehtävä viipymättä ratamestarille. Tuloslaskentaan liittyvät protestit on jätettävä ennen lopullisten tulosten julkaisemista. Muuhun kuin tuloslaskentavirheeseen liittyvä protesti on jätettävä kahden tunnin kuluessa tapahtumasta tai sen tiedoksisaannista, kuitenkin ennen kilpailun päättymistä."
+  },
+  {
+    "id": "8.2.5",
+    "title": "Jury",
+    "text": "Kilpailun jury julkistetaan kilpailun alkupuhuttelussa. Juryn puheenjohtajana toimii kilpailunjohtaja ilman äänivaltaa. Juryn jäseninä toimii kolme kilpailuorganisaation ulkopuolista SRA-tuomaria. Kerho- ja piiritason kilpailuissa ei tarvitse nimetä juryä."
+  },
+  {
+    "id": "L1",
+    "title": "Liite 1 – Pahvitaulu 2024",
+    "text": "Kilpailuissa voidaan käyttää RESUL:n hyväksymää pahvitaulua. Taulun mitat ja osuma-alueet on määritelty virallisessa liitteessä. Taulujen tulee olla ehjiä ja selkeästi tulkittavissa."
+  },
+  {
+    "id": "L2",
+    "title": "Liite 2 – Pahvitaulu",
+    "text": "Vaihtoehtoisia pahvitauluja voidaan käyttää, mikäli niiden muoto ja pisteytys on selvitetty ampujille ennen kilpailua."
+  },
+  {
+    "id": "L3",
+    "title": "Liite 3 – Kivääri",
+    "text": "Kiväärin tulee olla keskisytytteistä patruunaa käyttävä, olkaa vasten tuettava ase. Kivääri varustetaan vähintään 20 patruunan lippaalla ja kantohihnalla. Optiset ja elektroniset tähtäimet ovat sallittuja avoimessa ja TST-luokassa. Tukijalkojen ja muiden varusteiden mitat ja sallittavuus määräytyvät luokan mukaan."
+  },
+  {
+    "id": "L4",
+    "title": "Liite 4 – Pistooli ja revolveri",
+    "text": "Pistoolin vähimmäiskaliiperi on 9 mm. Olkatuet ja kompensaattorit eivät ole sallittuja. Asevalot ja äänenvaimentimet ovat sallittuja sääntöjen ja luokan mukaisesti."
+  },
+  {
+    "id": "L5",
+    "title": "Liite 5 – Tarkka-ampujakivääri",
+    "text": "Tarkka-ampujakivääriä koskevat vaatimukset on määritelty erillisessä liitteessä. Aseen, tähtäinten ja varusteiden tulee vastata kilpailuluokan vaatimuksia."
+  },
+  {
+    "id": "L6",
+    "title": "Liite 6 – Haulikko",
+    "text": "Haulikon tulee olla turvallinen ja toimintavarma. Metallitauluja ammuttaessa on noudatettava vähimmäisetäisyyksiä kimmoketurvallisuuden varmistamiseksi."
+  },
+  {
+    "id": "L7",
+    "title": "Liite 7 – TST-luokan varusteet",
+    "text": "TST-luokan ampujalla tulee olla mukanaan pistooli, kivääri, riittävä määrä patruunoita, vettä, teräase, valaisin, ensiapuvälineet sekä taistelu- tai varusteliivi. Varusteiden yhteispainon tulee olla vähintään 12 kg."
+  };
 </script>
 
 </body>
