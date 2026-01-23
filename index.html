@@ -4,65 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SRA 8.1</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 26px;
+    }
+
+    input[type="search"] {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    .result {
+      border-bottom: 1px solid #333;
+      padding: 12px 0;
+    }
+
+    .result h3 {
+      margin: 0 0 6px 0;
+      font-size: 18px;
+    }
+
+    .result p {
+      margin: 0;
+      font-size: 15px;
+      color: #ccc;
+      line-height: 1.4;
+    }
+  </style>
 </head>
+
 <body>
+
+  <h1>SRA 8.1</h1>
+
   <input
-  type="search"
-  id="search"
-  placeholder="Hae SRA-säännöistä…"
-  oninput="searchRules()"
-/>
+    type="search"
+    id="search"
+    placeholder="Hae säännöistä…"
+    oninput="searchRules()"
+  >
 
-<div id="results"></div>
-  <header>
-    <h1>SRA 8.1</h1>
-    <input id="search" type="search" placeholder="Hae säännöistä…">
-  </header>
+  <div id="results"></div>
 
-  <main id="results"></main>
-
-  <script src="app.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
+    let rules = [];
+
+    // Ladataan säännöt
+    fetch("rules.json")
+      .then(response => response.json())
+      .then(data => {
+        rules = data;
+        console.log("Säännöt ladattu:", rules.length);
+      })
+      .catch(err => {
+        console.error("rules.json ei lataudu", err);
+        document.getElementById("results").innerHTML =
+          "<p>Virhe: rules.json ei lataudu</p>";
+      });
+
+    function searchRules() {
+      const query = document.getElementById("search").value.toLowerCase();
+      const results = document.getElementById("results");
+
+      results.innerHTML = "";
+
+      if (query.length < 2) return;
+
+      rules.forEach(rule => {
+        const text = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
+
+        if (text.includes(query)) {
+          const div = document.createElement("div");
+          div.className = "result";
+          div.innerHTML = `
+            <h3>${rule.id} ${rule.title}</h3>
+            <p>${rule.text}</p>
+          `;
+          results.appendChild(div);
+        }
+      });
     }
   </script>
-  <script>
-let rules = [];
 
-// Ladataan säännöt
-fetch("rules.json")
-  .then(response => response.json())
-  .then(data => {
-    rules = data;
-    console.log("Säännöt ladattu:", rules.length);
-  })
-  .catch(err => console.error("Virhe rules.json:", err));
-
-function searchRules() {
-  const query = document.getElementById("search").value.toLowerCase();
-  const resultsDiv = document.getElementById("results");
-
-  resultsDiv.innerHTML = "";
-
-  if (query.length < 2) return;
-
-  rules.forEach(rule => {
-    const haystack = (rule.id + " " + rule.title + " " + rule.text).toLowerCase();
-
-    if (haystack.includes(query)) {
-      const item = document.createElement("div");
-      item.className = "result";
-      item.innerHTML = `
-        <h3>${rule.id} ${rule.title}</h3>
-        <p>${rule.text}</p>
-      `;
-      resultsDiv.appendChild(item);
-    }
-  });
-}
-</script>
 </body>
 </html>
